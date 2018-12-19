@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Spring Boot :: Contatos</title>
+
+<!-- Bootstrap -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+	<div class="container">
+		<h2>Cadastrar contato</h2>
+		<form class="form-narrow form-horizontal" method="post"
+			th:action="@{/contatos/salvar}" th:object="${contato}">
+			<div th:if="${#fields.hasErrors('*')}" class="alert alert-error">
+				<p th:each="error : ${#fields.errors('*')}" th:text="${error}">Erro
+					de validação</p>
+			</div>
+			<input type="hidden" id="id" th:field="*{id}" />
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="nome">Nome</label>
+				<input
+					class="col-sm-10" type="text" id="nome" placeholder="Nome"
+					th:field="*{nome}"
+					th:class="${#fields.hasErrors('nome')} ? 'field-error' : 'field-error'" />
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="email">E-mail</label>
+				<input
+					class="col-sm-10" type="text" id="email" placeholder="E-mail"
+					th:field="*{email}"
+					th:class="${#fields.hasErrors('email')} ? 'field-error'" />
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="telefone">Telefone</label>
+				<input
+					class="col-sm-10" type="text" id="telefone" placeholder="Telefone"
+					th:field="*{telefone}"
+					th:class="${#fields.hasErrors('telefone')} ? 'field-error'" />
+			</div>			
+			<div class="col-sm-offset-2 col-sm-10">
+				<button class="btn btn-sm btn-primary" type="submit" >Salvar</button>
+				<button class="btn btn-sm btn-primary" type="reset" >Limpar</button>
+			</div>
+		</form>
+		<div class= "alert alert-success" th:if="${globalMessage}"
+			th:text="${globalMessage}">
+			Contato cadastrado com sucesso</div> 
+		</div>
+		<hr>
+		<div>
+			<a class="btn btn-sm btn-primary" th:href="@{/contatos/}">
+				Contatos</a>
+		</div>
+	</div>
+</body>
+</html>

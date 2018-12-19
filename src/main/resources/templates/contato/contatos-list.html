@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Spring Boot :: Contatos</title>
+
+<!-- Bootstrap -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+	<div class="container">
+		<h2>Lista de Contatos</h2>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Nome</th>
+					<th>E-mail</th>
+					<th>Telefone</th>
+					<th>Edit</th>
+					<th>Remove</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="cont : ${lista}">
+					<td th:text="${cont.nome}"></td>
+					<td th:text="${cont.email}"></td> 
+					<td th:text="${cont.telefone}"></td>
+					<td><a class="btn btn-warning" 
+					    th:href="@{'/contatos/editar/' + ${cont.id}}">Editar</a></td>
+					<td><a class="btn btn-warning" 
+					    th:href="@{/contatos/remover/{x}(x=${cont.id})}">Remover</a></td>										    					
+				</tr>
+			</tbody>
+		</table>
+
+		<h6><a th:href="@{/contatos/novo}">Novo</a></h6>
+		<h6><a th:href="@{/}">Home</a></h6>
+		
+
+	</div>
+</body>
+</html>
